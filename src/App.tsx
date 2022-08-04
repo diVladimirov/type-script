@@ -1,35 +1,31 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Card, { CardVariant } from "./components/Card";
-import UserList from "./components/UserList";
-import { IUser } from "./types/types";
+import List from "./components/List";
+import UserItem from "./components/UserItem";
+// import UserList from "./components/UserList";
+import { ITodo, IUser } from "./types/types";
+import TodoItem from "./components/TodoItem";
+import EventsExapmle from "./components/EventsExapmle";
+import { Routes, Route } from "react-router-dom";
+import UserPage from "./pages/UserPage";
+import TodosPage from "./pages/TodosPage";
+import Layout from "./components/Layout";
+import UserItemsPage from "./pages/UserItemsPage";
+import TodosItemPage from "./pages/TodosItemPage";
 
 const App = () => {
-  const users: IUser[] = [
-    {
-      id: 1,
-      name: "One",
-      email: "one@gmail.com",
-      address: { city: "London", street: "One Avenue", zipcode: "25623" },
-    },
-    {
-      id: 2,
-      name: "Two",
-      email: "two@gmail.com",
-      address: { city: "Paris", street: "Two Avenue", zipcode: "657856" },
-    },
-  ];
   return (
-    <div>
-      <Card
-        onClick={(num) => console.log("click", num)}
-        variant={CardVariant.outlined}
-        width="200px"
-        height="200px"
-      >
-        <button>Button</button>
-      </Card>
-      <UserList users={users} />
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="users" element={<UserPage />} />
+          <Route path="users/:id" element={<UserItemsPage />} />
+          <Route path="todos" element={<TodosPage />} />
+          <Route path="todos/:id" element={<TodosItemPage />} />
+        </Route>
+      </Routes>
+    </>
   );
 };
 
